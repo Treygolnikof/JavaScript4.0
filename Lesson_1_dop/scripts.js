@@ -1,11 +1,12 @@
 "use strict";
 
 var num = 33721;
-var multipleNum = num * num;
+var strNum = num + "";
+var multipleNum = strNum[0] * strNum[1] * strNum[2] * strNum[3] * strNum[4];
 
 console.log(multipleNum);
 
 var degreeMultipleNum = multipleNum ** 3;
-var str = degreeMultipleNum + "";
+var strDegreeMultipleNum = degreeMultipleNum + "";
 
-console.log( str[0] + str[1] );
+alert(strDegreeMultipleNum[0] + strDegreeMultipleNum[1]);
