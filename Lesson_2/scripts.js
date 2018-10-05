@@ -37,6 +37,7 @@ function start() {
     //         console.log('done');
     //         appData.expenses[answerExpenses] = answerExpensesBudget;
     //     } else {
+    //         alert("Произошла ошибка! Попробуйте ещё раз!");
     //         i--;
     //     }
     // }
@@ -52,6 +53,7 @@ function start() {
     //         console.log('done');
     //         appData.expenses[answerExpenses] = answerExpensesBudget;
     //     } else {
+    //         alert("Произошла ошибка! Попробуйте ещё раз!");
     //         i--;
     //     }
     // }
