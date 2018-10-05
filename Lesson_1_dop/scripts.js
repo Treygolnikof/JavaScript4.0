@@ -11,5 +11,5 @@ function start() {
     var strDegreeMultipleNum = degreeMultipleNum + "";
 
     alert(strDegreeMultipleNum[0] + strDegreeMultipleNum[1]);
-};
+}
 start();
