@@ -17,7 +17,7 @@ function start() {
 
     let str3 = str2.slice(-6);
 
-    alert(str3.substr(0, 4) + "о");
+    alert(str2.substr(0, 10) + "о " + str3.substr(0, 4) + "о");
 
     let arr = [
         20,
