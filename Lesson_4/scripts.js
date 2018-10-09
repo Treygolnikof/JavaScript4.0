@@ -75,7 +75,7 @@ let appData = {
         for (let i = 0; i < 1; i++) {   
             let items = prompt("Что принесёт дополнительный доход? (Перечислите через запятую)", "");
             
-            if ( typeof(items) === 'string' && items != null && items != '') {
+            if ( typeof(items) === 'string' && items != null && items != '' && isNaN(items)) {
                 console.log('done');
                 appData.income = items.split(", ");
                 appData.income.push(prompt("Может что-то ещё?"));
@@ -96,6 +96,7 @@ let appData = {
     }
 };
 
+console.log("Наша программа включает в себя данные: ");
 for (let key in appData) {
-    console.log("Наша программа включает в себя данные: " + key + " - " + appData[key]);
+    console.log(key);
 }
