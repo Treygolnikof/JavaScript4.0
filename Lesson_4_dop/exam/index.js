@@ -25,7 +25,7 @@ function getFriendlyNumbers(start, end) {
     }
 
     let arrBestFriendsForever = [];
-    for (let i = 0; i < Math.ceil(arrBestFriends.length / 2); i++) {
+    for (let i = 0; i < arrBestFriends.length / 2; i++) {
         arrBestFriendsForever[i] = arrBestFriends.slice((i*2), (i*2) + 2);
     }
     return arrBestFriendsForever;
