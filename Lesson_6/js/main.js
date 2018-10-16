@@ -38,8 +38,13 @@ buttonStart.addEventListener('click', function() {
     monthValue.value = new Date(Date.parse(time)).getMonth() + 1;
     dayValue.value = new Date(Date.parse(time)).getDate();
     buttonCountBudget.removeAttribute('disabled');
-    buttonExpensesItem.removeAttribute('disabled');
-    buttonOptionalExpenses.removeAttribute('disabled');
+    for (let i = 0; i < expensesItem.length; i++) {  
+        expensesItem[i].removeAttribute('readonly');
+    }
+    for (let i = 0; i < optionalExpenses.length; i++) {  
+        optionalExpenses[i].removeAttribute('readonly');
+    }
+    chooseIncome.removeAttribute('readonly');
 });
 
 buttonExpensesItem.addEventListener('click', function() {
@@ -58,7 +63,7 @@ buttonExpensesItem.addEventListener('click', function() {
 });
 
 buttonOptionalExpenses.addEventListener('click', function() {
-    optionalExpenesesValue.innerHTML = '';
+    optionalExpenesesValue.innerText = '';
     
     for (let i = 0; i < optionalExpenses.length; i++) {
         let answerOptExpenses = optionalExpenses[i].value;
@@ -103,11 +108,14 @@ checkSavings.addEventListener('click', function() {
         appData.savings = false;
     } else {
         appData.savings = true;
+        chooseSum.removeAttribute('readonly');
+        choosePercent.removeAttribute('readonly');
     }
 });
 
 chooseSum.addEventListener('input', function() {
     if (appData.savings == true) {
+        chooseSum.addAttribute('readonly');
         let sum = +chooseSum.value,
             percent = +choosePercent.value;
 
@@ -121,6 +129,7 @@ chooseSum.addEventListener('input', function() {
 
 choosePercent.addEventListener('input', function() {
     if (appData.savings == true) {
+        choosePercent.addAttribute('readonly');
         let sum = +chooseSum.value,
             percent = +choosePercent.value;
 
@@ -141,17 +150,21 @@ let appData = {
     savings: false
 };
 
-// function validate() {
-//     if (expensesItem[0].value != '' && expensesItem[1].value != ''  || expensesItem[2].value != '' && expensesItem[3].value != '') {
-//         buttonExpensesItem.removeAttribute('disabled');
-//     } else if (optionalExpenses[0].value != '' || optionalExpenses[1].value != '' || optionalExpenses[2].value != '') {
-//         buttonOptionalExpenses.removeAttribute('disabled');
-//     }
-// }
-
 for (let i = 0; i < optionalExpenses.length; i++) {
     optionalExpenses[i].addEventListener('keyup', function() {
         optionalExpenses[i].value = optionalExpenses[i].value.replace(/[^а-яА-ЯёЁ]/ig, '');
+        buttonOptionalExpenses.disabled = optionalExpenses[i].value ? false : 'disabled';
     })
 }
 
+for (let i = 0; i < expensesItem.length; i++) {
+    expensesItem[i].addEventListener('keyup', function() {
+        buttonExpensesItem.disabled = expensesItem[0].value && expensesItem[1].value || expensesItem[2].value && expensesItem[3].value ? false : 'disabled';
+    })
+}
+
+for (let i = 0; i < expensesItem.length; i += 2) {
+    expensesItem[i].addEventListener('keyup', function() {
+        expensesItem[i].value = expensesItem[i].value.replace(/[^а-яА-ЯёЁ]/ig, '');
+    })
+}
