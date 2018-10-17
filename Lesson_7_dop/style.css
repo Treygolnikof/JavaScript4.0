@@ -1,7 +1,6 @@
-button {
-    background: rgb(199, 50, 50);
-    border: 2px solid rgb(128, 12, 12);
-    height: 80px;
-    width: 80px;
-    border-radius: 50%;
+img {
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
