@@ -86,21 +86,24 @@ window.addEventListener('DOMContentLoaded', function() {
 
     //Scroll
 
-    let container = [].slice.call(document.querySelectorAll('a[href*="#"]'));
+    let nav = document.querySelector('nav');
 
-    container.forEach(function(item) {
-        item.addEventListener('click', function(e) {
+    nav.addEventListener('click', function(e) {
+        if (e.target.matches('a')) {
             e.preventDefault();
-            let coorY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top,
+
+            let a = e.target.getAttribute('href').slice(1);
+            a = document.getElementById(a);
+            
+            let coor = a.getBoundingClientRect().top,
+                i = 0,
                 scroll = setInterval(function() {
-                    let scrollBy = coorY / 100;
-                    if(scrollBy > window.pageYOffset - coorY && window.innerHeight + window.pageYOffset < document.body.offsetHeight) {
-                        window.scrollBy(0, scrollBy);
-                    } else {
-                        window.scrollTo(0, coorY);
+                    scrollBy(0, coor / 40);
+                    i++;
+                    if (i == 40) {
                         clearInterval(scroll);
                     }
-            }, 10);
-        });
+                }, 20);
+        }
     });
 });

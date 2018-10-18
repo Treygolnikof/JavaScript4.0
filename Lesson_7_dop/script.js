@@ -1,36 +1,111 @@
-let cat = document.querySelector('img');
+let img = document.querySelector('img'),
+    i = k = 1;
 
-cat.addEventListener('mouseover', function() {
-    let corX = Math.floor(Math.random() * 500),
-        corY = Math.floor(Math.random() * 500);
+function downAnim() {
+    let req = requestAnimationFrame(downAnim);
 
-        cat.style.left = corX
-        cat.style.top = corY
+    img.style.top = k + 'px';
 
-        animate(function(timePassed) {
-            cat.style.left = timePassed + 'px';
-            cat.style.top = timePassed + 'px';
-          });
-});
+    k += 5;
+
+    if (k > 400) {
+        cancelAnimationFrame(req);
+        leftAnim();
+    }
+
+}    
+downAnim();
     
-function animate(draw, duration) {
-    let start = performance.now();
+function leftAnim() {
+    let req = requestAnimationFrame(leftAnim);
+    
+    img.style.left = i + 'px';
 
-    requestAnimationFrame(function animate(time) {
-        // определить, сколько прошло времени с начала анимации
-        let timePassed = time - start;
+    i += 5;
 
-        console.log(time, start)
-            // возможно небольшое превышение времени, в этом случае зафиксировать конец
-        if (timePassed > duration) timePassed = duration;
+    if (i > 400) {
+        cancelAnimationFrame(req);
+        upAnim();
+    }
+}
 
-        // нарисовать состояние анимации в момент timePassed
-        draw(timePassed);
+function upAnim() {
+    let req = requestAnimationFrame(upAnim);
+    
+    img.style.top = k + 'px';
 
-        // если время анимации не закончилось - запланировать ещё кадр
-        if (timePassed < duration) {
-            requestAnimationFrame(animate);
-        }
+    k -= 5;
 
-    });
-};
+    if (k < 0) {
+        cancelAnimationFrame(req);
+        leftAnim2();
+    }
+}
+
+function leftAnim2() {
+    let req = requestAnimationFrame(leftAnim2);
+    
+    img.style.left = i + 'px';
+
+    i += 5;
+
+    if (i > 800) {
+        cancelAnimationFrame(req);
+        downAnim2();
+    }
+}
+
+function downAnim2() {
+    let req = requestAnimationFrame(downAnim2);
+
+    img.style.top = k + 'px';
+
+    k += 5;
+
+    if (k > 400) {
+        img.style.transform = 'scaleX(-1)';
+        cancelAnimationFrame(req);
+        rightAnim();
+    }
+
+}
+
+function rightAnim() {
+    let req = requestAnimationFrame(rightAnim);
+    
+    img.style.left = i + 'px';
+
+    i -= 5;
+
+    if (i < 400) {
+        cancelAnimationFrame(req);
+        upAnim2();
+    }
+}
+
+function upAnim2() {
+    let req = requestAnimationFrame(upAnim2);
+    
+    img.style.top = k + 'px';
+
+    k -= 5;
+
+    if (k < 0) {
+        cancelAnimationFrame(req);
+        rightAnim2();
+    }
+}
+
+function rightAnim2() {
+    let req = requestAnimationFrame(rightAnim2);
+    
+    img.style.left = i + 'px';
+
+    i -= 5;
+
+    if (i < 0) {
+        img.style.transform = 'scaleX(1)';
+        cancelAnimationFrame(req);
+        downAnim();
+    }
+}
