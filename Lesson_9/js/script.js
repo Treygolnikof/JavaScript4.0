@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     //Timer
 
-    let deadline = '2018-10-20';
+    let deadline = '2018-10-18';
 
     function getTimeRemaining(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -86,39 +86,90 @@ window.addEventListener('DOMContentLoaded', function() {
 
     //Scroll
 
-    let container = [].slice.call(document.querySelectorAll('a[href*="#"]'));
+    let nav = document.querySelector('nav');
 
-    container.forEach(function(item) {
-        item.addEventListener('click', function(e) {
+    nav.addEventListener('click', function(e) {
+        if (e.target.matches('a')) {
             e.preventDefault();
-            let coorY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top,
+
+            let a = e.target.getAttribute('href').slice(1);
+            a = document.getElementById(a);
+            
+            let coor = a.getBoundingClientRect().top,
+                i = 0,
                 scroll = setInterval(function() {
-                    let scrollBy = coorY / 100;
-                    if(scrollBy > window.pageYOffset - coorY && window.innerHeight + window.pageYOffset < document.body.offsetHeight) {
-                        window.scrollBy(0, scrollBy);
-                    } else {
-                        window.scrollTo(0, coorY);
+                    scrollBy(0, coor / 40);
+                    i++;
+                    if (i == 40) {
                         clearInterval(scroll);
                     }
-            }, 10);
-        });
+                }, 20);
+        }
     });
 
     //Modal
 
-    let more = document.querySelector('.more'),
-        overlay = document.querySelector('.overlay'),
-        close = document.querySelector('.popup-close');
+    function openAnimCSSModal() {
+        let more = document.querySelector('.more'),
+            overlay = document.querySelector('.overlay'),
+            close = document.querySelector('.popup-close');
 
-    more.addEventListener('click', function() {
-        overlay.style.display = 'block';
-        this.classList.add('more-splash');
-        document.body.style.overflow = 'hidden';
-    });
+        more.addEventListener('click', function() {
+            overlay.style.display = 'block';
+            this.classList.add('more-splash');
+            document.body.style.overflow = 'hidden';
+        });
 
-    close.addEventListener('click', function() {
-        overlay.style.display = 'none';
-        more.classList.remove('more-splash');
-        document.body.style.overflow = '';
-    });
+        close.addEventListener('click', function() {
+            overlay.style.display = 'none';
+            this.classList.remove('more-splash');
+            document.body.style.overflow = '';
+        });
+    }
+
+    function openModal() {
+        let more = document.querySelector('.more'),
+            overlay = document.querySelector('.overlay'),
+            close = document.querySelector('.popup-close');
+            overlay.style.animation = 'none';
+
+        more.addEventListener('click', function() {
+            overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        close.addEventListener('click', function() {
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+    }
+
+    function openAnimJSModal() {
+        let more = document.querySelector('.more'),
+            overlay = document.querySelector('.overlay'),
+            close = document.querySelector('.popup-close');
+            overlay.style.animation = 'none';
+
+            more.addEventListener('click', function() {
+                overlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+            });
+    
+            close.addEventListener('click', function() {
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+    }
+
+    //Browser
+
+    function getNameBrowser(){
+        let usAg = navigator.userAgent;
+        if (window.screen.availWidth < 767) openModal();
+        if (usAg.search(/Trident/) > 0) openAnimCSSModal();
+        if (usAg.search(/Edge/) > 0) openAnimCSSModal();
+        openAnimJSModal();
+    }
+    getNameBrowser();
 });
