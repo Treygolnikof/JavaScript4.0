@@ -1,6 +1,6 @@
 class options {
     constructor(text, height, width, bg, fontSize, textAlign) {
-        this.text = text
+        this.text = text;
         this.height = height;
         this.width = width;
         this.bg = bg;
@@ -34,5 +34,5 @@ btn.addEventListener('click', function() {
     let abc = new options(text,h,w,b,f,t);
 
     abc.createDiv();
-})
+});
 

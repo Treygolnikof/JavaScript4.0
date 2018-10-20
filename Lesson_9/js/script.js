@@ -147,18 +147,28 @@ window.addEventListener('DOMContentLoaded', function() {
     function openAnimJSModal() {
         let more = document.querySelector('.more'),
             overlay = document.querySelector('.overlay'),
-            close = document.querySelector('.popup-close');
+            close = document.querySelector('.popup-close'),
+            popup = document.querySelector('.popup');
             overlay.style.animation = 'none';
 
             more.addEventListener('click', function() {
                 overlay.style.display = 'block';
                 document.body.style.overflow = 'hidden';
-                
+                popup.style.top = '-300px';
+                let i = 0;
+                function downAnim() {
+                    let req = requestAnimationFrame(downAnim);
+                    popup.style.top = i + 'px';
+                    i += 5;
+                    if (i > 150) cancelAnimationFrame(req);  
+                }
+                downAnim();
             });
     
             close.addEventListener('click', function() {
                 overlay.style.display = 'none';
                 document.body.style.overflow = '';
+                popup.style.top = '-300px';
             });
     }
 
