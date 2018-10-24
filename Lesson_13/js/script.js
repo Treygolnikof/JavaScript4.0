@@ -443,14 +443,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
         function calcAnim() {
             let req = requestAnimationFrame(calcAnim);
-            i += 100;
-
             totalValue.innerHTML = i;
-
-            console.log(i);
-            if (i == total) {
+            if (i < total) {
+                i += 100;
+            } else if (i => total) {
                 cancelAnimationFrame(req);
-            }
+                i = 0;
+            } 
         }
     }
     calc();
