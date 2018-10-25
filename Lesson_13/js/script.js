@@ -357,7 +357,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 let req = requestAnimationFrame(transformUp);
 
                 slides[slideIndex - 1].style.transform = 'translateY(' + k + 'px)';
-                console.log(slides[slideIndex - 1].style.transform);
                 k += 1;
 
                 if (k > 0) {
