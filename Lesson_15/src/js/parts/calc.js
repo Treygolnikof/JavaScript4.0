@@ -26,7 +26,7 @@ function calc() {
         restDays.value = restDays.value.replace(/\D/g, "");
         total = (daysSum + personsSum) * 4000;
 
-        if (persons.value == '' || restDays.value == '') {
+        if (persons.value == '' || restDays.value == '' || restDays.value == 0 || persons.value == 0) {
             totalValue.innerHTML = 0;
         } else {
             setTimeout(calcAnim(), 10);
@@ -34,7 +34,7 @@ function calc() {
     });
 
     place.addEventListener('change', function() {
-        if (restDays.value == '' || persons.value == '') {
+        if (restDays.value == '' || persons.value == '' || restDays.value == 0 || persons.value == 0) {
             totalValue.innerHTML = 0;
         } else {
             let a = total;
