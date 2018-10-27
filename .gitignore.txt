@@ -1,2 +1,1 @@
-*.log
-node_modules/
+Lesson_15/node_modules/
