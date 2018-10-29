@@ -14,18 +14,26 @@ var myFunc = function(a){
 	}
 	return newArr;
 }
-console.log(each(arr2, myFunc));
 
 let assert = require('chai').assert;
 
 describe('sum', function() {
-    it('Возвращает true?', function() {
-        assert.equal(sum(2, 2), true);
+    it('sum возвращает true?', function() {
+        assert.isTrue(sum(10, 2));
     });
 });
 
-describe('sum', function() {
-    it('Возвращает true?', function() {
-        assert.equal(sum(2, 2), true);
+describe('num', function() {
+    it('num равно 5?', function() {
+        assert.equal(num, 5);
     });
 });
+
+describe('each', function() {
+    it('each массив с длинной 5', function() {
+        assert.isArray(each(arr2, myFunc));
+        assert.deepEqual(each(arr2, myFunc), [ 8, 7, 6, 5, 4 ]);
+        assert.lengthOf(each(arr2, myFunc), 5);
+    });
+});
+
